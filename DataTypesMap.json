@@ -31,8 +31,8 @@
     },
 
     "tinyint" : {
-        "increased_size"           : "int",
-        "type"                     : "smallint",
+        "increased_size"           : "",
+        "type"                     : "boolean",
         "mySqlVarLenPgSqlFixedLen" : true
     },
 
