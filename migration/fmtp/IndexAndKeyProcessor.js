@@ -86,10 +86,12 @@ module.exports = (self, tableName) => {
 
                                                 } else {
                                                     // "schema_idxname_{integer}_idx" - is NOT a mistake.
-                                                    const columnName = objPgIndices[attr].column_name[0].slice(1, -1) + cnt++;
+                                                    const columnName = objPgIndices[attr].column_name[0].slice(1, -1);
+                                                    const columnNameString = objPgIndices[attr].column_name.map((name)=>{return name.slice(1, -1)}).join('_and_');
                                                     indexType        = 'index';
                                                     sql              = 'CREATE ' + (objPgIndices[attr].is_unique ? 'UNIQUE ' : '') + 'INDEX "'
-                                                        + self._schema + '_' + tableName + '_' + columnName + '_idx" ON "'
+                                                        // + self._schema + '_' + tableName + '_' + columnName + '_idx" ON "'
+                                                        + 'index' + '_' + tableName + '_on_' + columnNameString + '" ON "'
                                                         + self._schema + '"."' + tableName + '" '
                                                         + objPgIndices[attr].Index_type + ' (' + objPgIndices[attr].column_name.join(',') + ');';
                                                 }
